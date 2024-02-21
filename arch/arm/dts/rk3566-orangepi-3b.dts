@@ -107,7 +107,7 @@
 	phy-mode = "rgmii";
 	clock_in_out = "output";
 
-	snps,reset-gpio = <&gpio2 RK_PD1 GPIO_ACTIVE_LOW>;
+	snps,reset-gpio = <&gpio3 RK_PC2 GPIO_ACTIVE_LOW>;
 	snps,reset-active-low;
 	/* Reset time is 20ms, 100ms for rtl8211f */
 	snps,reset-delays-us = <0 20000 100000>;
@@ -117,17 +117,41 @@
 	assigned-clock-rates = <0>, <125000000>;
 
 	pinctrl-names = "default";
-	pinctrl-0 = <&gmac1m1_miim
-		     &gmac1m1_tx_bus2
-		     &gmac1m1_rx_bus2
-		     &gmac1m1_rgmii_clk
-		     &gmac1m1_rgmii_bus>;
+	pinctrl-0 = <&gmac1m0_miim
+		&gmac1m0_tx_bus2
+		&gmac1m0_rx_bus2
+		&gmac1m0_rgmii_clk
+		&gmac1m0_rgmii_bus>;
 
 	tx_delay = <0x4f>;
 	rx_delay = <0x26>;
 
 	phy-handle = <&rgmii_phy1>;
-	status = "disabled";
+	status = "okay";
+};
+
+&gmac1m0_miim {
+	u-boot,dm-pre-reloc;
+};
+
+&gmac1m0_tx_bus2 {
+	u-boot,dm-pre-reloc;
+};
+
+&gmac1m0_rx_bus2 {
+	u-boot,dm-pre-reloc;
+};
+
+&gmac1m0_rgmii_clk {
+	u-boot,dm-pre-reloc;
+};
+
+&gmac1m0_rgmii_bus {
+	u-boot,dm-pre-reloc;
+};
+
+&gpio3 {
+	u-boot,dm-pre-reloc;
 };
 
 &mdio0 {
